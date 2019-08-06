@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
+import com.Init.InitMenu;
 import com.model.Aperator;
 import com.util.BaseServire;
 import com.util.Busy;
@@ -88,6 +89,8 @@ public class System_Menu extends Busy{
 	    		SQL += "UPDATE BASEMENT..TBLYSYSINFO SET VNAME=? WHERE VSYSNO=?";
 	    	}
 	    	doc = ServireSQL(BaseServire.SysModify, SQL, list, inopr);
+	    	//菜单修改，将
+	    	new InitMenu().Init();
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    }
