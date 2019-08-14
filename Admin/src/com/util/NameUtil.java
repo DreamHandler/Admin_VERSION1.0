@@ -8,7 +8,7 @@ public class NameUtil {
 	/**
 	 * 系统编码
 	 */
-	public static final String SysNo = "01";
+	public static final String SysNo = "H1";
 	
 	/**
 	 * DOM对象字段说明父节点名称
