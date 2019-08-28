@@ -454,7 +454,7 @@ System_Menu.prototype = Object.extend(new LBase(), {
 				node = SM.StrToXml(response.responseText);
 			}
 			var FieldsValue = node.documentElement.selectSingleNode("FieldsValue").childNodes;
-			alert(FieldsValue[0].getAttribute("MAX_VNUM"))
+//			alert(FieldsValue[0].getAttribute("MAX_VNUM"))
 			var max_Vnum = parseInt(FieldsValue[0].getAttribute("MAX_VNUM"));
 			SM.New_Vnum = (max_Vnum+1)<10?"0"+(max_Vnum+1):""+(max_Vnum+1);
 			SM.menu_btn_add(SM.add_flag);
