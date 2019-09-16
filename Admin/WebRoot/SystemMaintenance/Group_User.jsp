@@ -83,12 +83,12 @@
 							筛选：<input id="admin_info" type="text" onkeyup="GU.QryAdminData();"/>
 						</div>
 						<div id="admin_grid_data">
-							<table id="admin_list"></table>
+							<table id="admin_list" ></table>
 						</div>
 						<div id="admin_grid_input">
 							<div id="admin_middle" class="col-xs-12" >
-								<div class="col-xs-4">
-									编码：<input id="admin_VJOBNUM" name="编码" type="text" disabled>
+								<div class="col-xs-4" style="display:none;">
+									编码：<input id="admin_VJOBNUM" name="编码" type="text" >
 								</div>
 								<div class="col-xs-4">
 									名称：<input id="admin_VNAME" name="名称" type="text" disabled>

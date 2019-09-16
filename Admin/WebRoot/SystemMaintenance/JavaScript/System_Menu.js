@@ -424,7 +424,7 @@ System_Menu.prototype = Object.extend(new LBase(), {
 			addNode_parent = SM.select_treeNode
 		}
 		var new_ixh = "9"+SM.New_Vnum;
-		var newNode = {VNum:SM.New_Vnum,VName:"23",IZH:izh,IXH:new_ixh,VXTBM:$("#system_VSYSNO").val()};
+		var newNode = {VNum:SM.New_Vnum,VName:"新建菜单",IZH:izh,IXH:new_ixh,VXTBM:$("#system_VSYSNO").val()};
 		newNode = SM.menu_zTree.addNodes(addNode_parent, newNode);
 		//选择点
 		var node = SM.menu_zTree.getNodeByParam('IXH', new_ixh);
@@ -454,9 +454,14 @@ System_Menu.prototype = Object.extend(new LBase(), {
 				node = SM.StrToXml(response.responseText);
 			}
 			var FieldsValue = node.documentElement.selectSingleNode("FieldsValue").childNodes;
-//			alert(FieldsValue[0].getAttribute("MAX_VNUM"))
-			var max_Vnum = parseInt(FieldsValue[0].getAttribute("MAX_VNUM"));
-			SM.New_Vnum = (max_Vnum+1)<10?"0"+(max_Vnum+1):""+(max_Vnum+1);
+			var MAX_VNUM = FieldsValue[0].getAttribute("MAX_VNUM");
+			MAX_VNUM = MAX_VNUM==""?"0":MAX_VNUM;
+			var max_Vnum = ""+(parseInt(MAX_VNUM)+1);
+			var len = max_Vnum.length;
+			for(var j=0;j<(5-len);j++){
+				max_Vnum = "0"+max_Vnum;
+			}
+			SM.New_Vnum = max_Vnum;
 			SM.menu_btn_add(SM.add_flag);
 		}
 	},

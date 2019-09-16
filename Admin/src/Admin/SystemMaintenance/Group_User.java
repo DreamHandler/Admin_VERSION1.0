@@ -159,6 +159,7 @@ public class Group_User extends Busy{
 	    String SQL = "";
 	    try {
 	    	if("1".equals(status)){ //新增
+	    		VJOBNUM = GetVNum(inEle,inopr);
 	    		SQL += "INSERT INTO BASEMENT..TBUSER(VNAME,VascName,VUSER,VPSWD,VJOBNUM,VascNum)"
 	    				+ "VALUES('"+VNAME+"','"+VascName+"','"+VUSER+"','"+VPSWD+"','"+VJOBNUM+"','"+VascNum+"')";
 	    	}else if("2".equals(status)){ //修改
@@ -170,5 +171,41 @@ public class Group_User extends Busy{
 	      e.printStackTrace();
 	    }
 	    return doc.asXML();
+	}
+	/**
+	 * 获取编码的插空数值
+	 */
+	public String GetVNum(Document inEle, Aperator inopr){
+		Document doc = null;
+		String SQL="SELECT STUFF((SELECT '|'+VJOBNUM FROM BASEMENT..TBUSER "
+				+ " ORDER BY VJOBNUM FOR XML PATH('')),1,1,'') AS VJOBNUM";
+		String SmaxVJOBNUM = "";
+		try {
+			doc = this.ServireSQL(BaseServire.SysQuer,SQL,null,inopr);
+			Element FieldValue = doc.getRootElement().element("FieldsValue").element("FieldValue");
+			String VJOBNUMStr = "".equals(FieldValue.attributeValue("VJOBNUM"))?"|0":FieldValue.attributeValue("VJOBNUM");
+			int maxVJOBNUM = Integer.parseInt(VJOBNUMStr.substring(VJOBNUMStr.lastIndexOf("|")+1,VJOBNUMStr.length()));
+			String SnowVJOBNUM = "00001";
+			for(int i=1;i<=maxVJOBNUM;i++){
+				SnowVJOBNUM = ""+i;
+				int len = SnowVJOBNUM.length();
+				for(int k=0;k<(5-len);k++){
+					SnowVJOBNUM = "0"+SnowVJOBNUM;
+				}
+				if(!(VJOBNUMStr.indexOf(SnowVJOBNUM+"|")>-1)){
+					break;
+				}
+			}
+			int nowVJOBNUM = (Integer.parseInt(SnowVJOBNUM)==maxVJOBNUM?maxVJOBNUM+1:Integer.parseInt(SnowVJOBNUM));
+			SmaxVJOBNUM = ""+nowVJOBNUM;
+			int len = SmaxVJOBNUM.length();
+			for(int j=0;j<(5-len);j++){
+				SmaxVJOBNUM = "0"+SmaxVJOBNUM;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//		System.out.println(doc.asXML());
+		return SmaxVJOBNUM;
 	}
 }

@@ -116,7 +116,7 @@ Group_User.prototype = Object.extend(new LBase(), {
 		$("#admin_list").jqGrid({
 			data: [],
 			datatype: "local",
-			height: $("#admin_grid_data").height() - 140,
+			height: $("#admin_grid_data").height() - 40,
 			width:$("#admin_grid_data").width(),
 			colNames:['编码','名称','账号','VascNum','VascName','VPSWD'],
 			colModel:[
@@ -353,7 +353,7 @@ Group_User.prototype = Object.extend(new LBase(), {
 			      $("#"+n.id).val("");
 		    });
 		}
-		$("#admin_VJOBNUM").focus();
+		$("#admin_VNAME").focus();
 	},
 	admin_btn_update : function(){
 		if(!GU.grid_disabled()){
@@ -400,7 +400,7 @@ Group_User.prototype = Object.extend(new LBase(), {
 	},
 	admin_btn_save : function(){
 		var bool = true;
-		$("#admin_VJOBNUM,#admin_VNAME,#admin_VUSER,#admin_VPSWD").each(function(i,n){
+		$("#admin_VNAME,#admin_VUSER,#admin_VPSWD").each(function(i,n){
 			var value = $("#"+n.id).val();
 			if(value == "" || value == null ||  value == undefined){
 				var name = $("#"+n.id).attr("name");
